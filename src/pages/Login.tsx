@@ -32,6 +32,15 @@ export default function Login() {
       return;
     }
 
+    if (!email.toLowerCase().includes('gmail')) {
+      toast({
+        title: 'Error',
+        description: 'Email must be a Gmail address',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     setIsLoading(true);
     try {
       await login(email, password, role);
@@ -40,10 +49,10 @@ export default function Login() {
         description: 'Logged in successfully',
       });
       navigate(role === 'teacher' ? '/teacher' : '/student');
-    } catch (error) {
+    } catch (error: any) {
       toast({
         title: 'Error',
-        description: 'Failed to login. Please try again.',
+        description: error.message || 'Invalid credentials. Please sign up first.',
         variant: 'destructive',
       });
     } finally {

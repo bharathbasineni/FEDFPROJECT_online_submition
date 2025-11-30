@@ -4,7 +4,7 @@ const User = require('./models/User');
 
 async function main() {
   const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/gradebuddy';
-  await mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+  await mongoose.connect(MONGO_URI);
   console.log('Connected to', MONGO_URI);
 
   try {

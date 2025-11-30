@@ -42,6 +42,15 @@ export default function Signup() {
       return;
     }
 
+    if (!/^[a-zA-Z\s]+$/.test(name)) {
+      toast({
+        title: 'Error',
+        description: 'Name must contain only letters',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     if (password !== confirmPassword) {
       toast({
         title: 'Error',
@@ -68,10 +77,10 @@ export default function Signup() {
         description: 'Account created successfully',
       });
       navigate(role === 'teacher' ? '/teacher' : '/student');
-    } catch (error) {
+    } catch (error: any) {
       toast({
         title: 'Error',
-        description: 'Failed to create account. Please try again.',
+        description: error.message || 'Failed to create account. Please try again.',
         variant: 'destructive',
       });
     } finally {
